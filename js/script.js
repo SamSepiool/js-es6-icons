@@ -112,14 +112,20 @@ const icons = [
 // Milestone 1
 // Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibili come da layout.
 
-icons.forEach((element, i) => {
+icons.forEach((element) => {
+    const keys = {family, prefix, name} = element;
+
     document.getElementById("piano_icons").innerHTML += 
     `<div class="tile">
-    <i class="${icons[i].family} ${icons[i].prefix}${icons[i].name}"></i>
-    <h3>${icons[i].name}</h3>
+        <i class="${family} ${prefix}${name}"></i>
+        <h3>${name}</h3>
     </div>`;
-    console.log(icons[i]);
 })
+
+
+
+
+
 
 
 

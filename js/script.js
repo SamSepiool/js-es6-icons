@@ -1,6 +1,10 @@
-const print = (arr, field) => {   
 // Milestone 1
 // Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibili come da layout.
+const print = (arr, field) => {   
+    // pulisco il "campo"
+    field.innerHTML = '';
+
+    // stampo tiles nell'html
     arr.forEach((element) => {
 
                 const keys = {name, family, prefix, color} = element;
@@ -143,6 +147,7 @@ const pianoTiles = document.getElementById('piano_icons');
 
 const iconsColored = icons.map( 
     (element) =>{
+        // aggiungo proprietà colore ad ogni oggetto, scegliendone il valore in base alla categoria dell'elemento
         element.color = categoryColor[element.category];
         return element;
 
@@ -151,6 +156,49 @@ const iconsColored = icons.map(
 print(iconsColored, pianoTiles);
 
 
+// Milestone 3
+// Creiamo una select con i tipi di icone e usiamola per filtrare le icone
+
+const categories = [];
+
+// estraggo categorie icone
+icons.forEach(
+    (element) => {
+        // le aggiungo all'array categories una volta sola
+        if(!categories.includes(element.category)){
+            categories.push(element.category);
+        }
+    }
+);
+
+
+// SELECT CATEGORIE ICONE
+const selectCategories = document.getElementById('iconType');
+
+// genero tante opzioni quante sono le categorie
+categories.forEach(
+    (element) => {
+        selectCategories.innerHTML += `<option value="${element}">${element}</option>`
+    }
+);
+
+
+
+// EVENTO SELECT
+selectCategories.addEventListener('change',
+
+    function(){
+        // filtro le icone in base alla categoria scelta (selectCategories)
+        const filtered = iconsColored.filter((element) => {
+            if (element.category == selectCategories.value || selectCategories.value == "") {
+                return true;
+            }
+            return false;
+        });
+        // stampo icone filtrate
+        print(filtered, pianoTiles);
+    }
+);
 
 
 

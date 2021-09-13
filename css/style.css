@@ -40,7 +40,6 @@ main{
 #piano_icons{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .tile{
